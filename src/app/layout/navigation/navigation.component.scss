@@ -1,0 +1,15 @@
+
+
+a {
+  padding: 0 5px;
+  text-decoration: none;
+  color: white;
+}
+
+.is-active {
+  color: yellow;
+}
+
+span ~ span {
+  padding-right: 5px;
+}
