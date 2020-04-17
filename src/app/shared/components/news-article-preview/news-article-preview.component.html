@@ -1,0 +1,22 @@
+<mat-card class="card">
+    <mat-card-header>
+      <div fxFlex fxLayout="column" fxLayoutAlign="space-between">
+        <mat-card-title>{{(article.title?.length>90) ? (article.title | slice:0:90)+'...':(article.title)}}</mat-card-title>
+        <mat-card-subtitle>{{article.author}} - {{article.source.name}}</mat-card-subtitle>
+      </div>
+
+    </mat-card-header>
+    
+    <mat-card-content>
+      <div class="image-wrapper">
+        <img mat-card-image src="{{article.urlToImage}}" alt="{{article.title}}" loading="lazy">
+      </div>
+      <p>
+        {{(article.description?.length>150) ? (article.description | slice:0:150)+'...':(article.description)}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+        <span fxFlex></span>
+      <button mat-button (click)="displayArticleDetails(article)" >View more >></button>
+    </mat-card-actions>
+  </mat-card>

@@ -4,3 +4,66 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 * {
     box-sizing: border-box;
 }
+
+.preview-wrapper {
+    display: inline-block;
+    width: 16.66%;
+    // min-width:350px;
+    padding: 10px;
+    overflow: hidden;
+    height: 500px;
+}
+
+
+@media screen and (max-width: 1700px) {
+    .preview-wrapper {
+        width:20%;
+    }
+  }
+
+
+@media screen and (max-width: 1400px) {
+    .preview-wrapper {
+        width:25%;
+    }
+  }
+  
+  @media screen and (max-width: 1200px) {
+    .preview-wrapper {
+        width: 33%;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    .preview-wrapper {
+        width: 50%;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    .preview-wrapper {
+        display: block;
+        width: 80%;
+        margin: 0 auto;
+
+        height: 450px;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    .preview-wrapper {
+        display: block;
+        width: 100%;
+        height: 500px;
+    }
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  app-top-news .preview-wrapper .mat-card-header-text {
+    display: none;
+  }
+
+  

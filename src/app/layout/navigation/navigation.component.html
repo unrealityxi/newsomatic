@@ -1,12 +1,25 @@
 <mat-toolbar color="primary">
-  <span color="accent">
-    <a color="accent" [routerLink]="['/top-news']" [routerLinkActive]="['is-active']">Top News</a>
-    <a color="accent" [routerLink]="['/categories']" [routerLinkActive]="['is-active']">Categories</a>
-    <a color="accent" [routerLink]="['/search']" [routerLinkActive]="['is-active']">Search</a>
-  </span>
-  <span fxFlex></span>
 
-  <span>US</span>
-  <span>|</span>
-  <span>GB</span>
+  <button mat-button class="app-title"><a href="#">~ NEWSOMATIC ~</a></button>
+
+  <button class="menuTrigger" mat-button [mat-menu-trigger-for]="menu" fxHide.gt-sm>
+    <mat-icon>menu</mat-icon>
+   </button>
+
+  <span fxShow="true" fxHide.lt-md="true" class="blockOnMobile">
+    <a [routerLink]="['/top-news']" [routerLinkActive]="['is-active']">Top news</a>
+    <a [routerLink]="['/categories']" [routerLinkActive]="['is-active']">Categories</a>
+    <a [routerLink]="['/search']" [routerLinkActive]="['is-active']">Search</a>
+  </span>
+
+  <span fxFlex></span>
+  <button [class.blocked]="!shouldEnableLanguageChange" class="lang-button" *ngFor="let lang of languages" mat-button
+    (click)="setLanguage(lang)" [color]="selectedLanguage == lang ? 'accent': 'white'">{{lang.toUpperCase()}}</button>
 </mat-toolbar>
+<mat-menu color="primary" x-position="before" #menu="matMenu">
+  <button mat-menu-item routerLink="/top-news" [routerLinkActive]="['is-active']">Top news</button>
+  <button mat-menu-item routerLink="/categories" [routerLinkActive]="['is-active']">Categories</button>
+  <button mat-menu-item routerLink="/search" [routerLinkActive]="['is-active']">Search</button>
+
+  <!--<button mat-menu-item>Help</button>-->
+</mat-menu>

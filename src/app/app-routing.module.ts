@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'news-article',
+    path: 'articles',
     loadChildren: () =>
       import('./features/news-article/news-article.module').then(
         (m) => m.NewsArticleModule
@@ -29,6 +29,7 @@ const routes: Routes = [
       ),
   },
   { path: '', redirectTo: 'top-news', pathMatch: 'full' },
+  { path: '**', redirectTo: 'top-news' },
 ];
 
 @NgModule({

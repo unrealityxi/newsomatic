@@ -1,0 +1,26 @@
+.card {
+  height: 100%;
+  position: relative;
+  mat-card-actions {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    z-index: 10;
+  }
+
+  mat-card-header {
+    height: 150px;
+  }
+}
+
+.mat-card-header-text {
+    display: none;
+}
+
+.image-wrapper {
+  height: 120px;
+  overflow: hidden;
+  // img {
+  //     object-fit: cover;
+  // }
+}

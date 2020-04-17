@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { NewsArticleComponent } from './news-article.component';
+import { NewsArticleComponent } from './components/news-article/news-article.component';
 
-const routes: Routes = [{ path: '', component: NewsArticleComponent }];
+const routes: Routes = [
+  { path: ':article', component: NewsArticleComponent },
+  { path: '', redirectTo: '/top-news' },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class NewsArticleRoutingModule { }
+export class NewsArticleRoutingModule {}

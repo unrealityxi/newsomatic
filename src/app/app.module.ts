@@ -8,6 +8,7 @@ import { LayoutModule } from 'src/app/layout/layout.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NewsService } from 'src/app/services/news.service';
 import { HttpClientModule } from '@angular/common/http';
+import { LanguageService } from 'src/app/services/language.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     LayoutModule,
     SharedModule
   ],
-  providers: [NewsService],
+  providers: [NewsService, LanguageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,6 +9,8 @@ export class LanguageService {
     this._language
   );
 
+  shouldEnableLanguageSelection$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+
   get language(): languages {
     return this._language;
   }
@@ -19,4 +21,11 @@ export class LanguageService {
   }
 
   constructor() {}
+
+  disableLanguageSelection(){
+    this.shouldEnableLanguageSelection$.next(false);
+  }
+  enableLanguageSelection(){
+    this.shouldEnableLanguageSelection$.next(true);
+  }
 }

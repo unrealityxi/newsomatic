@@ -1,0 +1,41 @@
+
+.container {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.article-title, .article-body, .article-footer {
+
+    padding: 30px 0;
+
+}
+
+.article-title {
+    width: 70%;
+}
+.article-image {
+    width: 100%;
+    padding-bottom: 30px;
+}
+
+.article-body {
+    width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+    .container {
+        width: 100%;
+    }
+
+    .article-image {
+        padding-bottom: 10px;
+    }
+
+    .article-title, .article-body, .article-footer {
+        padding: 10px 0;
+    }
+
+    .article-title {
+        width: 90%;
+    }
+  }

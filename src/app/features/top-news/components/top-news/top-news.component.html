@@ -1,3 +1,4 @@
-<p *ngFor="let article of newsArticles">
-    {{ article | json }}
-</p>
+<div class="preview-wrapper"  *ngFor="let article of newsArticles">
+    <app-news-article-preview [article]=article>
+    </app-news-article-preview>
+</div>
