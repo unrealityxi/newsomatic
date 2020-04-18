@@ -4,6 +4,7 @@ import { NewsPage } from 'src/app/models/news/news-page.model';
 import { NewsArticle } from 'src/app/models/news/news-article.model';
 import { LanguageService } from 'src/app/services/language.service';
 import { untilDestroyed } from 'ngx-take-until-destroy';
+import { languages } from 'src/app/models/enums/languages.enum';
 @Component({
   selector: 'app-top-news',
   templateUrl: './top-news.component.html',
@@ -12,6 +13,8 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 export class TopNewsComponent implements OnInit, OnDestroy {
   public newsArticles: Array<NewsArticle> = [];
   constructor(private newsService: NewsService, private langService: LanguageService) { }
+
+  public lang: languages;
 
   ngOnInit() {
     this.listenToLanguageChangesAndFetchData();
@@ -25,6 +28,7 @@ export class TopNewsComponent implements OnInit, OnDestroy {
 
   listenToLanguageChangesAndFetchData() {
     this.langService.language$.pipe(untilDestroyed(this)).subscribe((lang) => {
+      this.lang = lang;
       this.fetchNewsData();
     });
   }

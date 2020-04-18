@@ -10,7 +10,7 @@ import { until } from 'protractor';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { NewsArticle } from './../models/news/news-article.model';
 
-const API_KEY = '3ba1e3604f6e46f29b0301051793e249';
+const API_KEY = '505a9d5702f546c9aa25bce60da54dd8';
 const NEWS_BASE_URL = 'https://newsapi.org/v2';
 const TOP_HEADLINES_URL = NEWS_BASE_URL + '/top-headlines?country=';
 
@@ -26,21 +26,31 @@ export class NewsService {
   private listenToLanguageChanges() {
     this.langService.language$.pipe(untilDestroyed(this)).subscribe((lang) => {
       this.lang = lang;
-    })
+    });
   }
 
   public getTopNews(): Observable<NewsPage> {
     return this.http
-      .get<NewsPage>(this.getTopNewsUrl(), this.getAuthHeaders())
-      .pipe(first());
+      .get<NewsPage>(this.getTopNewsUrl(), this.getAuthHeaders());
   }
 
   private getTopNewsUrl(): string {
     return `${TOP_HEADLINES_URL}${this.lang}`;
   }
 
-  private getTopByCategoryUrl(category: newsCategories, limit?: number): string {
-    return `${this.getTopNewsUrl()}&category=${category}&language=${this.lang}`;
+  public getTopNewsByCategory(category: newsCategories, limit?) {
+    const url = this.getTopByCategoryUrl(category, limit);
+    return this.http.get(url, this.getAuthHeaders());
+  }
+
+  private getTopByCategoryUrl(
+    category: newsCategories,
+    limit?: number
+  ): string {
+    const maxItems = limit ? `&pageSize=${limit}` : '';
+    return `${this.getTopNewsUrl()}&category=${category}&language=${
+      this.lang
+    }${maxItems}`;
   }
 
   private getAuthHeaders() {
@@ -56,5 +66,5 @@ export class NewsService {
     this.selectedArticle = article;
   }
 
-  ngOnDestroy(){}
+  ngOnDestroy() {}
 }

@@ -5,6 +5,7 @@
         {{article.content}}
     </div>
     <div class="article-footer">
-        Read entire article: <a href={{article.url}}>{{article.url}}</a>
+        <p>Read entire article: <a href={{article.url}}>{{article.url}}</a></p>
+        <button style="margin-top: 20px;" mat-raised-button (click)="goBack()"><< Back</button>
     </div>
 </div>

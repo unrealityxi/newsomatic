@@ -42,4 +42,8 @@ export class NewsArticleComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.enableLanguageSelection();
   }
+
+  goBack(){
+    window.history.back();
+  }
 }

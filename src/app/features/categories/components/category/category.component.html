@@ -1,0 +1,25 @@
+<mat-expansion-panel [expanded]="expanded">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <button  title="Get all of the news in {{category}} category" (click)="handleTitleClick($event)" mat-button class="category-title">{{category}}</button>
+      
+    </mat-panel-title>
+    <mat-panel-description>
+       <span><mat-chip-list><mat-chip title="Loaded news in this category">{{articles.length}}</mat-chip></mat-chip-list></span><span class="panel-additional-title" fxShow.lt-sm='false'>Top news from {{category}} category</span>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <div *ngIf='shouldShowSlider'
+  >
+    <ngx-tiny-slider #slider [config]="sliderConfig">
+      <ng-container class="items">
+        <app-news-article-preview *ngFor="let article of articles; let i = index" class="carousel-child"
+          [article]=article>
+        </app-news-article-preview>
+      </ng-container>
+
+    </ngx-tiny-slider>
+  </div>
+
+
+</mat-expansion-panel>

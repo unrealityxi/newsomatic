@@ -1,0 +1,7 @@
+
+<h1>Top 5 news per category in <span>{{currentLanguage?.toUpperCase()}}</span></h1>
+
+<!-- *ngFor="let category of categories" [category]='category' -->
+<mat-accordion>
+    <app-category *ngFor="let category of categories; let i = index" [category]='category' [expanded]="!i" ></app-category>
+</mat-accordion>

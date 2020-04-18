@@ -62,8 +62,45 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     text-align: center;
   }
 
-  app-top-news .preview-wrapper .mat-card-header-text {
+  .preview-wrapper .mat-card-header-text, .carousel-child  .mat-card-header-text {
     display: none;
+}
+
+
+  app-category .mat-content {
+      align-items: center !important;
+    
   }
 
-  
+  .tns-inner {
+    padding: 10px;
+  }
+
+  .tns-outer {
+    position: relative;
+  }
+
+  .tns-controls > button {
+    width: 30px;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgba(0,0,0, 0.2)
+  }
+
+  .tns-controls > button:first-of-type{
+    position: absolute;
+    top: 0;
+    ;
+    left: -15px;
+    bottom: 10px;
+  }
+
+  .tns-controls > button:last-of-type{
+    position: absolute;
+    top: 0;
+    right: -15px;
+    bottom: 10px;
+  }
