@@ -17,11 +17,14 @@ export class SearchComponent implements OnInit, OnDestroy {
   searchQuery$ = new Subject<string>();
   articles: Array<NewsArticle>;
   lang: languages;
-  constructor(private newsService: NewsService, private langService: LanguageService) {
+  constructor(
+    private newsService: NewsService,
+    private langService: LanguageService
+  ) {
     this.initializeSearch();
   }
 
-  handleSearchQueryChange(q){
+  handleSearchQueryChange(q) {
     this.searchQuery$.next(q);
   }
 
@@ -29,14 +32,16 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.langService.language$.subscribe((lang) => {
       this.lang = lang;
     });
-    this.newsService.instantSearch(this.searchQuery$).pipe(untilDestroyed(this))
-      .subscribe(results => {
+    this.newsService
+      .instantSearch(this.searchQuery$)
+      .pipe(untilDestroyed(this))
+      .subscribe((results) => {
         this.articles = results.articles;
       });
   }
 
-  execSearch(){
-    if(this.searchQuery) {
+  execSearch() {
+    if (this.searchQuery) {
       this.searchQuery$.next(this.searchQuery);
     }
   }

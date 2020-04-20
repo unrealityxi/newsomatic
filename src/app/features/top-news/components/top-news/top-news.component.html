@@ -1,5 +1,3 @@
 <h1>Top news from {{lang.toUpperCase()}}:</h1>
-<div class="preview-wrapper"  *ngFor="let article of newsArticles">
-    <app-news-article-preview [article]=article>
-    </app-news-article-preview>
-</div>
+
+<app-news-articles-page [articles]="articles"></app-news-articles-page>

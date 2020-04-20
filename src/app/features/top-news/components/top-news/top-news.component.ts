@@ -11,7 +11,7 @@ import { languages } from 'src/app/models/enums/languages.enum';
   styleUrls: ['./top-news.component.scss']
 })
 export class TopNewsComponent implements OnInit, OnDestroy {
-  public newsArticles: Array<NewsArticle> = [];
+  public articles: Array<NewsArticle> = [];
   constructor(private newsService: NewsService, private langService: LanguageService) { }
 
   public lang: languages;
@@ -22,7 +22,7 @@ export class TopNewsComponent implements OnInit, OnDestroy {
 
   fetchNewsData() {
     this.newsService.getTopNews().subscribe((news: NewsPage) => {
-      this.newsArticles = news.articles;
+      this.articles = news.articles;
     });
   }
 

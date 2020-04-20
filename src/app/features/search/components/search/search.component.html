@@ -1,15 +1,17 @@
 <div>
     <h1>Search top news from {{lang.toUpperCase()}}:</h1>
         
-    <mat-form-field class="example-full-width">
-        <mat-label>Search ...</mat-label>
-        <input [(ngModel)]="searchQuery" (keyup)="handleSearchQueryChange($event.target.value)" type="string" matInput placeholder="Search ...">
+    <mat-form-field autocomplete="off" class="example-full-width">
+        <mat-label>Enter search term</mat-label>
+        <input [(ngModel)]="searchQuery" (keyup)="handleSearchQueryChange($event.target.value)" type="search" matInput placeholder="Search ...">
         <mat-icon matSuffix (click)="execSearch()" class="clickable">search</mat-icon>
       </mat-form-field>
   
 </div>
 
-<div class="preview-wrapper"  *ngFor="let article of articles">
-    <app-news-article-preview [article]=article>
-    </app-news-article-preview>
+<app-news-articles-page [articles]="articles"></app-news-articles-page>
+
+<div *ngIf="articles && !articles.length">
+    <hr>
+    <h2>Your search did not yield any results. Try again with different search terms.</h2>
 </div>
