@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_KEY: '505a9d5702f546c9aa25bce60da54dd8',
+  API_KEY: '694d5801faec4ee8bc501ba3acb9b4a7',
   API_KEY_HEADER_NAME: 'X-Api-Key',
   NEWS_BASE_URL: 'https://newsapi.org/v2',
   TOP_HEADLINES_URL: 'https://newsapi.org/v2/top-headlines?country=',

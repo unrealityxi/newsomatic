@@ -3,5 +3,5 @@
 
 <!-- *ngFor="let category of categories" [category]='category' -->
 <mat-accordion>
-    <app-category *ngFor="let category of categories; let i = index" [category]='category' [expanded]="!i" ></app-category>
+    <app-news-carousel *ngFor="let category of categories; let i = index" [category]='category' [expanded]="!i" ></app-news-carousel>
 </mat-accordion>

@@ -17,3 +17,12 @@
   top: 5px;
   padding-left: 20px;
 }
+
+.clickable {
+  cursor: pointer !important;
+}
+
+.clickable:active {
+  position: relative;
+  top: 1px;
+}

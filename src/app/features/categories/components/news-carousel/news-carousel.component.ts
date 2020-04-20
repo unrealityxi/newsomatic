@@ -9,20 +9,22 @@ import { NgxTinySliderComponent } from 'ngx-tiny-slider/lib/ngx-tiny-slider.comp
 import { NgxTinySliderSettingsInterface } from 'ngx-tiny-slider';
 import { LanguageService } from 'src/app/services/language.service';
 import { untilDestroyed } from 'ngx-take-until-destroy';
+import { Router } from '@angular/router';
 
 declare var tns: any;
 
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss'],
+  selector: 'app-news-carousel',
+  templateUrl: './news-carousel.component.html',
+  styleUrls: ['./news-carousel.component.scss'],
 })
-export class CategoryComponent implements OnInit, OnDestroy {
+export class NewsCarouselComponent implements OnInit, OnDestroy {
   @Input() category: newsCategories = newsCategories.business;
   @Input() expanded: boolean = false;
   @ViewChild('slider', { static: false }) slider: NgxTinySliderComponent;
 
   containerId = `slider-${uuid.v4()}`;
+  shouldShowSlider = true;
 
   public articles: Array<NewsArticle> = [];
   private articlesLimit = 5;
@@ -61,7 +63,8 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
   constructor(
     private newsService: NewsService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -76,16 +79,12 @@ export class CategoryComponent implements OnInit, OnDestroy {
         this.refreshSlider();
       });
   }
-
-  shouldShowSlider = true;
-
   refreshSlider() {
     this.shouldShowSlider = false;
     setTimeout(() => {
       this.shouldShowSlider = true;
 
-        this.loadSlider();
-   
+      this.loadSlider();
     });
   }
 
@@ -95,11 +94,17 @@ export class CategoryComponent implements OnInit, OnDestroy {
     });
   }
 
-  handleTitleClick($event) {
+  handleNumberCountClick($event) {
     $event.preventDefault();
     $event.stopPropagation();
     this.articlesLimit = 100;
     this.getCategoryData(this.category, this.articlesLimit);
+  }
+
+  handleTitleClick($event){
+    $event.preventDefault();
+    $event.stopPropagation();
+    this.router.navigateByUrl(`/categories/${this.category}`);
   }
 
   listenToLanguageChangeAndGetCategoryData() {

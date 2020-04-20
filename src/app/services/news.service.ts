@@ -15,9 +15,6 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 import { NewsArticle } from './../models/news/news-article.model';
 import { environment as env } from 'src/environments/environment';
 
-// const API_KEY = '505a9d5702f546c9aa25bce60da54dd8';
-// const NEWS_BASE_URL = 'https://newsapi.org/v2';
-// const TOP_HEADLINES_URL = NEWS_BASE_URL + '/top-headlines?country=';
 @Injectable()
 export class NewsService {
   lang = languages.us;
@@ -72,11 +69,11 @@ export class NewsService {
   }
 
   private getTopNewsUrl(limit = 100): string {
-    return `${env.TOP_HEADLINES_URL}${this.lang}`;
+    return env.TOP_HEADLINES_URL + this.lang + env.Q_PAGE_SIZE + limit;
   }
 
   private getTopByCategoryUrl(category: newsCategories, limit = 100): string {
-    return this.getTopNewsUrl() + env.Q_CATEGORY + category + env.Q_PAGE_SIZE + limit;
+    return this.getTopNewsUrl(limit) + env.Q_CATEGORY + category;
   }
 
   private getAuthHeaders() {
@@ -89,7 +86,7 @@ export class NewsService {
   }
 
   getSearchUrl(q: string) {
-    return env.TOP_HEADLINES_URL + this.lang + env.Q_QUERY + q;
+    return this.getTopNewsUrl() + env.Q_QUERY + q;
   }
 
   selectArticle(article: NewsArticle) {

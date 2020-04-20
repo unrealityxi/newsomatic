@@ -12,9 +12,9 @@ import { languages } from 'src/app/models/enums/languages.enum';
 })
 export class TopNewsComponent implements OnInit, OnDestroy {
   public articles: Array<NewsArticle> = [];
+  public lang: languages;
   constructor(private newsService: NewsService, private langService: LanguageService) { }
 
-  public lang: languages;
 
   ngOnInit() {
     this.listenToLanguageChangesAndFetchData();
@@ -33,6 +33,6 @@ export class TopNewsComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {};
+  ngOnDestroy() {}
 
 }

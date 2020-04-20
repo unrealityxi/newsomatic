@@ -1,11 +1,11 @@
 <mat-expansion-panel [expanded]="expanded">
   <mat-expansion-panel-header>
     <mat-panel-title>
-      <button  title="Get all of the news in {{category}} category" (click)="handleTitleClick($event)" mat-button class="category-title">{{category}}</button>
+      <button  title="Open category page category" (click)="handleTitleClick($event)" mat-button class="category-title">{{category}}</button>
       
     </mat-panel-title>
     <mat-panel-description>
-       <span><mat-chip-list><mat-chip title="Loaded news in this category">{{articles.length}}</mat-chip></mat-chip-list></span><span class="panel-additional-title" fxShow.lt-sm='false'>Top news from {{category}} category</span>
+       <span><mat-chip-list><mat-chip  class="clickable" (click)='handleNumberCountClick($event)' title="Load more news in this category">{{articles.length}}</mat-chip></mat-chip-list></span><span class="panel-additional-title" fxShow.lt-sm='false'>Top news from {{category}} category</span>
     </mat-panel-description>
   </mat-expansion-panel-header>
 
