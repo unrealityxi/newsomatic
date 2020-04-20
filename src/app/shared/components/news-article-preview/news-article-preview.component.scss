@@ -25,3 +25,21 @@
   //     object-fit: cover;
   // }
 }
+
+.line-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}
+
+.lc-4{
+  -webkit-line-clamp: 4;
+}
+
+.lc-1 {
+  -webkit-line-clamp: 1;
+}
+
+.lc-7 {
+  -webkit-line-clamp: 7;
+}

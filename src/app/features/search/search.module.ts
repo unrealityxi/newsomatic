@@ -1,15 +1,24 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 import { SearchRoutingModule } from './search-routing.module';
-import { SearchComponent } from './search.component';
+import { SearchComponent } from './components/search/search.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedComponentsModule } from 'src/app/shared/shared-components.module';
+import { FormsModule } from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
   declarations: [SearchComponent],
   imports: [
-    CommonModule,
-    SearchRoutingModule
+    SharedModule,
+    SharedComponentsModule,
+    FormsModule,
+    SearchRoutingModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule
   ]
 })
 export class SearchModule { }

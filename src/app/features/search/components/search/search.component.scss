@@ -1,0 +1,11 @@
+.clickable {
+    cursor: pointer;
+    position: relative;
+    top: 5px;
+    
+}
+
+.clickable:active {
+    position: relative;
+    top: 6px;
+}

@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { first } from 'rxjs/operators';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  filter,
+} from 'rxjs/operators';
 import { newsCategories } from '../models/enums/newsCategories.enum';
 import { languages } from '../models/enums/languages.enum';
-import { Observable } from 'rxjs';
+import { Observable, of, combineLatest } from 'rxjs';
 import { NewsPage } from 'src/app/models/news/news-page.model';
 import { LanguageService } from 'src/app/services/language.service';
-import { until } from 'protractor';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { NewsArticle } from './../models/news/news-article.model';
 
@@ -17,6 +21,7 @@ const TOP_HEADLINES_URL = NEWS_BASE_URL + '/top-headlines?country=';
 @Injectable()
 export class NewsService {
   lang = languages.us;
+
   public selectedArticle: NewsArticle;
 
   constructor(private http: HttpClient, private langService: LanguageService) {
@@ -30,12 +35,7 @@ export class NewsService {
   }
 
   public getTopNews(): Observable<NewsPage> {
-    return this.http
-      .get<NewsPage>(this.getTopNewsUrl(), this.getAuthHeaders());
-  }
-
-  private getTopNewsUrl(): string {
-    return `${TOP_HEADLINES_URL}${this.lang}`;
+    return this.http.get<NewsPage>(this.getTopNewsUrl(), this.getAuthHeaders());
   }
 
   public getTopNewsByCategory(category: newsCategories, limit?) {
@@ -43,14 +43,37 @@ export class NewsService {
     return this.http.get(url, this.getAuthHeaders());
   }
 
+  instantSearch(query$: Observable<string>) {
+    const queryDebounced$ = query$.pipe(
+      filter(q => !!q.trim()),
+      debounceTime(400),
+      distinctUntilChanged());
+
+    const searchAndLang$ = combineLatest(queryDebounced$, this.langService.language$);
+    return searchAndLang$.pipe(
+      switchMap((results) => this.getNewsBySearchQuery(results[0]))
+    );
+  }
+
+  getNewsBySearchQuery(query: string): Observable<NewsPage> {
+    if (!query) {
+      return;
+    }
+
+    query = encodeURIComponent(query);
+    return this.http.get<NewsPage>(this.getSearchUrl(query), this.getAuthHeaders());
+  }
+
+  private getTopNewsUrl(): string {
+    return `${TOP_HEADLINES_URL}${this.lang}`;
+  }
+
   private getTopByCategoryUrl(
     category: newsCategories,
     limit?: number
   ): string {
     const maxItems = limit ? `&pageSize=${limit}` : '';
-    return `${this.getTopNewsUrl()}&category=${category}&language=${
-      this.lang
-    }${maxItems}`;
+    return `${this.getTopNewsUrl()}&category=${category}${maxItems}`;
   }
 
   private getAuthHeaders() {
@@ -60,6 +83,10 @@ export class NewsService {
     return {
       headers,
     };
+  }
+
+  getSearchUrl(q: string) {
+    return TOP_HEADLINES_URL + this.lang + `&q=${q}`;
   }
 
   selectArticle(article: NewsArticle) {
